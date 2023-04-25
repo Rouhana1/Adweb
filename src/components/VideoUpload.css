@@ -1,0 +1,8 @@
+.VideoUpload {
+    border: 2px dashed #aaa;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
