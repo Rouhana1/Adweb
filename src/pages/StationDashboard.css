@@ -1,0 +1,26 @@
+.request-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .video-box,
+  .date-box {
+    margin: 0 10px;
+  }
+  .delete-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: red;
+    cursor: pointer;
+  }
+  
+  .delete-button:focus {
+    outline: none;
+  }

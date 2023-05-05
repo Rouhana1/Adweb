@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import './styles.css';
 
 const LoginPage = () => {
   const history = useHistory();
@@ -13,7 +14,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Login Page</h1>
       <button onClick={handlePublisherLogin}>Login as Publisher</button>
       <button onClick={handleStationLogin}>Login as Station</button>

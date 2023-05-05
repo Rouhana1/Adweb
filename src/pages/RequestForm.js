@@ -1,8 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import './styles.css';
 
 const RequestForm = () => {
+  const history = useHistory();
+  const [uploadedVideos, setUploadedVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+
+  useEffect(() => {
+    fetchUploadedVideos();
+  }, []);
+
+  const fetchUploadedVideos = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/uploads');
+      setUploadedVideos(response.data);
+    } catch (error) {
+      console.error('Error fetching uploaded videos:', error);
+    }
+  };
 
   const handleVideoChange = (event) => {
     setSelectedVideo(event.target.value);
@@ -12,21 +30,38 @@ const RequestForm = () => {
     setSelectedDate(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // For now, the submit button does nothing.
-    // You can add the logic to send the request later.
+    if (selectedVideo && selectedDate) {
+      try {
+        await axios.post('http://localhost:5000/requests', {
+          video: selectedVideo,
+          date: selectedDate,
+        });
+        alert('Request submitted');
+      } catch (error) {
+        console.error('Error submitting request:', error);
+      }
+    }
+  };
+
+  const handleBackClick = () => {
+    history.push('/mediapublisher-dashboard');
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Request Form</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="video">Select Video:</label>
           <select id="video" value={selectedVideo} onChange={handleVideoChange}>
-            {/* Here you will need to populate the options with the videos from the dashboard */}
-            {/* Example: <option value="video1.mp4">Video 1</option> */}
+            <option value="">Select a video</option>
+            {uploadedVideos.map((video, index) => (
+              <option key={index} value={video}>
+                {video}
+              </option>
+            ))}
           </select>
         </div>
         <div>
@@ -35,13 +70,16 @@ const RequestForm = () => {
             type="date"
             id="date"
             value={selectedDate}
+            
             onChange={handleDateChange}
-          />
-        </div>
-        <button type="submit">Submit Request</button>
-      </form>
-    </div>
-  );
-};
-
-export default RequestForm;
+            />
+          </div>
+          <button type="submit">Submit Request</button>
+        </form>
+        <button onClick={handleBackClick}>Back</button>
+      </div>
+    );
+  };
+  
+  export default RequestForm;
+  
