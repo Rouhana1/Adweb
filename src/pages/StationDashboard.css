@@ -1,26 +1,85 @@
-.request-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .video-box,
-  .date-box {
-    margin: 0 10px;
-  }
-  .delete-button {
-    background: none;
-    border: none;
-    font-size: 18px;
-    color: red;
-    cursor: pointer;
-  }
-  
-  .delete-button:focus {
-    outline: none;
-  }
+.request-box,
+.accepted-request-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.video-box,
+.date-box {
+  margin: 0 10px;
+}
+.delete-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: red;
+  cursor: pointer;
+}
+
+.delete-button:focus {
+  outline: none;
+}
+
+.accept-button {
+  background-color: green;
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.accept-button:hover {
+  background-color: #28a745;
+}
+
+.accept-button:focus {
+  outline: none;
+}
+
+.deny-button {
+  background-color: red;
+  color: white;
+  margin-left: 10px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deny-button:hover {
+  background-color: #dc3545;
+}
+
+.deny-button:focus {
+  outline: none;
+}
+
+.rbc-calendar {
+  padding: 20px;
+  margin-top: 20px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.requests-container {
+  width: 100%;
+}
+
+.calendar-container {
+  width: 100%;
+}

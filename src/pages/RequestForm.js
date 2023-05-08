@@ -8,6 +8,8 @@ const RequestForm = () => {
   const [uploadedVideos, setUploadedVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [peakTime, setPeakTime] = useState('');
+
 
   useEffect(() => {
     fetchUploadedVideos();
@@ -22,6 +24,9 @@ const RequestForm = () => {
     }
   };
 
+  const handlePeakTimeChange = (event) => {
+    setPeakTime(event.target.value);
+  };
   const handleVideoChange = (event) => {
     setSelectedVideo(event.target.value);
   };
@@ -32,11 +37,12 @@ const RequestForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (selectedVideo && selectedDate) {
+    if (selectedVideo && selectedDate && peakTime) {
       try {
         await axios.post('http://localhost:5000/requests', {
           video: selectedVideo,
           date: selectedDate,
+          peakTime: peakTime,
         });
         alert('Request submitted');
       } catch (error) {
@@ -44,7 +50,6 @@ const RequestForm = () => {
       }
     }
   };
-
   const handleBackClick = () => {
     history.push('/mediapublisher-dashboard');
   };
@@ -74,6 +79,14 @@ const RequestForm = () => {
             onChange={handleDateChange}
             />
           </div>
+          <div>
+          <label htmlFor="peakTime">Select Peak Time:</label>
+          <select id="peakTime" value={peakTime} onChange={handlePeakTimeChange}>
+            <option value="">Select a time</option>
+            <option value="Peak Time">Peak Time</option>
+            <option value="Nonpeak Time">Nonpeak Time</option>
+          </select>
+        </div>
           <button type="submit">Submit Request</button>
         </form>
         <button onClick={handleBackClick}>Back</button>
@@ -82,4 +95,3 @@ const RequestForm = () => {
   };
   
   export default RequestForm;
-  
