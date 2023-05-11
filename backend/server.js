@@ -5,10 +5,16 @@ const fs = require('fs');
 const path = require('path');
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
+const routes = require('./routes');
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(routes);
+app.use('/api', routes);
+
+
 
 const uri = 'mongodb+srv://mrouhana:cocomango@adweb.1r55vzl.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
@@ -111,4 +117,4 @@ app.put('/requests/:id', async (req, res) => {
   } catch (error) {
     console.error('Error connecting to the database:', error);
   }
-})();
+})();  
