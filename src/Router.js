@@ -5,6 +5,7 @@ import MediaPublisherDashboard from './pages/MediaPublisherDashboard';
 import StationDashboard from './pages/StationDashboard';
 import RequestForm from './pages/RequestForm';
 import CalendarPage from "./pages/CalendarPage";
+import AdminDashboard from './pages/AdminDashboard';
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
         <Route path="/station-dashboard" component={StationDashboard} />
         <Route path="/request-form" component={RequestForm} />
         <Route exact path="/calendar" component={CalendarPage} />
+        <Route exact path="/admin-dashboard" component={AdminDashboard} />
 
       </Switch>
     </BrowserRouter>

@@ -9,12 +9,24 @@ const RequestForm = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedDate, setSelectedDate] = useState(null);
   const [peakTime, setPeakTime] = useState('');
+  const [timeOptions, setTimeOptions] = useState([]);
+
 
 
   useEffect(() => {
     fetchUploadedVideos();
+    fetchTimeOptions();  // fetch time options on component mount
+
   }, []);
 
+  const fetchTimeOptions = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/time-slots');
+      setTimeOptions(response.data);
+    } catch (error) {
+      console.error('Error fetching time options:', error);
+    }
+  };
   const fetchUploadedVideos = async () => {
     try {
       const response = await axios.get('http://localhost:5000/uploads');
@@ -82,12 +94,16 @@ const RequestForm = () => {
           <div>
           <label htmlFor="peakTime">Select Peak Time:</label>
           <select id="peakTime" value={peakTime} onChange={handlePeakTimeChange}>
-            <option value="">Select a time</option>
-            <option value="Peak Time">Peak Time</option>
-            <option value="Nonpeak Time">Nonpeak Time</option>
-          </select>
+  <option value="">Select a time</option>
+  {timeOptions.map((option, index) => (
+    <option key={index} value={option.timeOption}>
+      {`${option.timeOption} - ${option.pricePerAd}$`}
+    </option>
+  ))}
+</select>
         </div>
           <button type="submit">Submit Request</button>
+
         </form>
         <button onClick={handleBackClick}>Back</button>
       </div>
